@@ -16,7 +16,7 @@ function EditCategory() {
         // Fetch category details to pre-fill the form
         const fetchCategory = async () => {
             try {
-                const response = await axios.get(`http://ec2-13-232-64-63.ap-south-1.compute.amazonaws.com:3000/api/v1/admin/category/list/${id}`, {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/category/list/${id}`, {
                     headers: {
                         'Authorization': localStorage.getItem('token'),
                         'Content-Type': 'application/json',

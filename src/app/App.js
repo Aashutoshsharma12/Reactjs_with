@@ -29,17 +29,17 @@ function App() {
           {isLoggedIn && location.pathname !== '/login' && <div className="" style={{ minWidth: "230px" }}><Sidebar /></div>}
           <div className="main-content">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/categories" element={<CategoryList />} />
-              <Route path="/categories/edit/:id" element={<EditCategory />} />
-              <Route path="/categories/view/:id" element={<ViewCategory />} />
-              <Route path="/users" element={<UserList />} />
-              <Route path="/users/view" element={<ViewUser />} />
-              <Route path="/renter_companies" element={<List />} />
-              <Route path="/ViewCompany" element={<ViewCompany />} />
+              <Route path="/admin/" element={<LandingPage />} />
+              <Route path="/admin/login" element={<Login />} />
+              <Route path="/admin/dashboard" element={<Home />} />
+              <Route path="/admin/about" element={<About />} />
+              <Route path="/admin/categories" element={<CategoryList />} />
+              <Route path="/admin/categories/edit/:id" element={<EditCategory />} />
+              <Route path="/admin/categories/view/:id" element={<ViewCategory />} />
+              <Route path="/admin/users" element={<UserList />} />
+              <Route path="/admin/users/view" element={<ViewUser />} />
+              <Route path="/admin/renter_companies" element={<List />} />
+              <Route path="/admin/ViewCompany" element={<ViewCompany />} />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </div>
