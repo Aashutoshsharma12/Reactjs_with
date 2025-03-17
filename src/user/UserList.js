@@ -50,7 +50,7 @@ function UserList() {
     useEffect(() => {
         const search = ''
         fetchUsers(search, false);
-    }, [fetchUsers, currentPage]);
+    }, [currentPage]);
     const handle_changePage = (currentPage) => {
         if (currentPage > 0 && currentPage <= totalPages)
             setCurrentPage(currentPage)

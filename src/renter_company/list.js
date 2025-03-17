@@ -51,7 +51,7 @@ const List = () => {
     }
     useEffect(() => {
         fetchData(search);
-    }, [fetchData, currentPage, search]);
+    }, [currentPage, search]);
     function handle_changePage(currentPage) {
         if (currentPage > 0 && currentPage <= totalPages) {
             setCurrentPage(currentPage);
