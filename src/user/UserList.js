@@ -43,7 +43,7 @@ function UserList() {
             setError(err.message || "Failed to fetch users");
             setLoading(false);
             if (err.response?.data?.code === 401) {
-                navigate('/login');
+                navigate('/admin/login');
             }
         }
     };
@@ -70,7 +70,7 @@ function UserList() {
         // href = {`/users/view/${user._id}`
         console.log(userDetails, "id-----------------------------------")
         // setUser({ name: userDetails.name, phoneNumber: userDetails.phoneNumber, email: userDetails.email, address: userDetails.address })
-        navigate(`/users/view?name=${userDetails.name}&phoneNumber=${userDetails.phoneNumber}&email=${userDetails.email}&address=${userDetails.address}&status=${userDetails.status ? 'Active' : 'Inactive'}`)
+        navigate(`/admin/users/view?name=${userDetails.name}&phoneNumber=${userDetails.phoneNumber}&email=${userDetails.email}&address=${userDetails.address}&status=${userDetails.status ? 'Active' : 'Inactive'}`)
     }
     if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>{error}</p>;

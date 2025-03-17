@@ -29,7 +29,7 @@ function ViewCategory() {
                 setError(err.response.data.error)
                 if (err.response.data.code === 401) {
                     clear_localStorage();
-                    navigate('/login')
+                    navigate('/admin/login')
                 }
             }
         }

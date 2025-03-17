@@ -46,7 +46,7 @@ const List = () => {
     const view = () => {
         return (data) => {
             // Auth.setUser(data);
-            navigate('/ViewCompany', { state: { user: data } });
+            navigate('/admin/ViewCompany', { state: { user: data } });
         }
     }
     useEffect(() => {

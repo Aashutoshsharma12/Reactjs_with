@@ -34,7 +34,7 @@ function Login() {
                 password,
             });
             localStorage.setItem("token", response.data.data.token); // Store token
-            navigate('/')
+            navigate('/admin/')
         } catch (err) {
             setError(err.response?.data?.message || "Login Failed!");
         }

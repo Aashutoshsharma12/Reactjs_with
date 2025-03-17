@@ -31,7 +31,7 @@ function EditCategory() {
                 setError(err.response.data.error)
                 if (err.response.data.code === 401) {
                     clear_localStorage();
-                    navigate('/login')
+                    navigate('/admin/login')
                 }
             }
         };
@@ -52,7 +52,7 @@ function EditCategory() {
                     'Content-Type': 'application/json',
                 }
             });
-            navigate('/categories'); // Redirect to category list after successful update
+            navigate('/admin/categories'); // Redirect to category list after successful update
         } catch (err) {
             setError(err.response.data.error)
             if (err.response.data.code === 401) {

@@ -46,7 +46,7 @@ function CategoryList() {
             setError(err.response?.data?.message || "Failed to fetch categories");
             setLoading(false);
             if (err.response?.data?.code === 401) {
-                navigate('/login');
+                navigate('/admin/login');
             }
         }
     };
@@ -80,7 +80,7 @@ function CategoryList() {
             setError(err.response?.data?.message || "Failed to fetch categories");
             setLoading(false);
             if (err.response?.data?.code === 401) {
-                navigate('/login');
+                navigate('/admin/login');
             }
         }
     };
