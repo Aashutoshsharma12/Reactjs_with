@@ -129,9 +129,9 @@ function CategoryList() {
                                 <td>{moment(category.updatedAt).format('YYYY-MM-DD')}</td>
                                 <td>specification</td>
                                 <td>
-                                    <a href={`/categories/edit/${category._id}`}><FaEdit /></a>
-                                    <a href={`/categories/view/${category._id}`}><FaEye /></a>
-                                    <a href={`/categories/delete/${category._id}`}><FaTrash /></a>
+                                    <a href={`/admin/categories/edit/${category._id}`}><FaEdit /></a>
+                                    <a href={`/admin/categories/view/${category._id}`}><FaEye /></a>
+                                    <a href={`/admin/categories/delete/${category._id}`}><FaTrash /></a>
                                 </td>
                             </tr>
                         ))}

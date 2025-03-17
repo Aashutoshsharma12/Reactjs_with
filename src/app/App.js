@@ -39,7 +39,7 @@ function App() {
               <Route path="/admin/users" element={<UserList />} />
               <Route path="/admin/users/view" element={<ViewUser />} />
               <Route path="/admin/renter_companies" element={<List />} />
-              <Route path="/admin/ViewCompany" element={<ViewCompany />} />
+              <Route path="/admin/renter_companies/view" element={<ViewCompany />} />
               {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>
           </div>

@@ -7,7 +7,7 @@ function Header() {
 
     const handleLogout = () => {
         localStorage.removeItem('token'); // Remove token from local storage
-        navigate('/login'); // Redirect to login page
+        navigate('/admin/login'); // Redirect to login page
     };
 
     return (

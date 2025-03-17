@@ -46,7 +46,7 @@ const List = () => {
     const view = () => {
         return (data) => {
             // Auth.setUser(data);
-            navigate('/admin/ViewCompany', { state: { user: data } });
+            navigate('/admin/renter_companies/view', { state: { user: data } });
         }
     }
     useEffect(() => {
@@ -99,8 +99,8 @@ const List = () => {
                                 <td>{user.isActive ? 'Active' : "Inactive"}</td>
                                 <td>
                                     <a onClick={() => viewUser({ userId: user._id, name: user.name, phoneNumber: user.phoneNumber, address: user.address, email: user.email ? user.email : 'N/A', status: user.isActive })}><FaEye /></a>
-                                    <a href={`/users/delete/${user._id}`}><FaTrash /></a>
-                                    <a href={`/users/update-status/${user._id}`}><FaSync /></a>
+                                    <a href={`/admin/users/delete/${user._id}`}><FaTrash /></a>
+                                    <a href={`/admin/users/update-status/${user._id}`}><FaSync /></a>
                                     {/* create a onclick*/}
                                 </td>
                             </tr>

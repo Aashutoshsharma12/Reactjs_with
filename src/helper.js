@@ -9,7 +9,7 @@ function User({ user }) {
 const useViewUser = () => {
     const navigate = useNavigate()
     return (userData) => {
-        navigate('/users/view', { state: { user: userData } });
+        navigate('/admin/users/view', { state: { user: userData } });
     };
 }
 /**
@@ -21,8 +21,8 @@ function List({ user }) {
     let delete1;
     let status;
     if (user.type === 'user') {
-        delete1 = '/users/delete/'
-        status = '/users/update-status/'
+        delete1 = '/admin/users/delete/'
+        status = '/admin/users/update-status/'
     }
     const viewUser = useViewUser();
 
