@@ -15,6 +15,7 @@ import ViewUser from "../user/ViewUser";
 import List from "../renter_company/list";
 import ViewCompany from '../renter_company/view';
 import { AuthContext } from "../context/auth_context";
+import EditUser from "../user/edit";
 // export default App;
 function App() {
   const location = useLocation();
@@ -26,7 +27,7 @@ function App() {
       <div className="app-container">
         {isLoggedIn && <Header />}
         <div style={{ display: 'flex', gap: "10px" }}>
-          {isLoggedIn && location.pathname !== '/login' && <div className="" style={{ minWidth: "230px" }}><Sidebar /></div>}
+          {isLoggedIn && location.pathname !== '/admin/login' && <div className="" style={{ minWidth: "230px" }}><Sidebar /></div>}
           <div className="main-content">
             <Routes>
               <Route path="/admin/" element={<LandingPage />} />
@@ -38,6 +39,7 @@ function App() {
               <Route path="/admin/categories/view/:id" element={<ViewCategory />} />
               <Route path="/admin/users" element={<UserList />} />
               <Route path="/admin/users/view" element={<ViewUser />} />
+              <Route path="/admin/users/edit" element={<EditUser />} />
               <Route path="/admin/renter_companies" element={<List />} />
               <Route path="/admin/renter_companies/view" element={<ViewCompany />} />
               {/* <Route path="*" element={<NotFound />} /> */}

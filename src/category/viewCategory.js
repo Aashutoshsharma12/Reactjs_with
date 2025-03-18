@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { clear_localStorage } from '../header/helper';
+import axiosInstance from '../axiosInstance';
 
 
 function ViewCategory() {
@@ -15,9 +15,8 @@ function ViewCategory() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/category/list/${id}`, {
+                const response = await axiosInstance.get(`api/v1/admin/category/list/${id}`, {
                     headers: {
-                        Authorization: localStorage.getItem('token'),
                         "Content-Type": "application/json"
                     }
                 });

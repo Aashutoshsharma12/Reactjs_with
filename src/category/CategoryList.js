@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import './categoryList.css'; // Create a CSS file for styling
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa'; // Example icons
-import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 function CategoryList() {
     const [categories, setCategories] = useState([]);
@@ -21,14 +21,13 @@ function CategoryList() {
     console.log(host, "host----------------")
     const fetchCategories = async (search) => {
         try {
-            let url = `${host}api/v1/admin/category/list?page=${currentPage}&perPage=${itemsPerPage}&isActive=all`
+            let url = `api/v1/admin/category/list?page=${currentPage}&perPage=${itemsPerPage}&isActive=all`
             if (search && search !== '' && search != null) {
-                url = `${host}api/v1/admin/category/list?page=${currentPage}&perPage=${itemsPerPage}&nameMatched=${search}&isActive=all`
+                url = `api/v1/admin/category/list?page=${currentPage}&perPage=${itemsPerPage}&nameMatched=${search}&isActive=all`
             }
-            const response = await axios.get(url,
+            const response = await axiosInstance.get(url,
                 {
                     headers: {
-                        'Authorization': localStorage.getItem('token'),
                         'Content-Type': 'application/json',
                     }
                 }
@@ -45,7 +44,7 @@ function CategoryList() {
             console.log(err, "err----------------")
             setError(err.response?.data?.message || "Failed to fetch categories");
             setLoading(false);
-            if (err.response?.data?.code === 401) {
+            if (err.status === 401) {
                 navigate('/admin/login');
             }
         }
@@ -56,14 +55,13 @@ function CategoryList() {
     }, [currentPage]); // Dependency array includes currentPage to refetch data when it changes
     const fetchCategories1 = async (search) => {
         try {
-            let url = `${host}api/v1/admin/category/list?page=1&perPage=${itemsPerPage}&isActive=all`
+            let url = `api/v1/admin/category/list?page=1&perPage=${itemsPerPage}&isActive=all`
             if (search && search !== '' && search != null) {
-                url = `${host}api/v1/admin/category/list?page=1&perPage=${itemsPerPage}&nameMatched=${search}&isActive=all`
+                url = `api/v1/admin/category/list?page=1&perPage=${itemsPerPage}&nameMatched=${search}&isActive=all`
             }
-            const response = await axios.get(url,
+            const response = await axiosInstance.get(url,
                 {
                     headers: {
-                        'Authorization': localStorage.getItem('token'),
                         'Content-Type': 'application/json',
                     }
                 }
@@ -79,7 +77,7 @@ function CategoryList() {
             console.log(err, "err----------------")
             setError(err.response?.data?.message || "Failed to fetch categories");
             setLoading(false);
-            if (err.response?.data?.code === 401) {
+            if (err.status === 401) {
                 navigate('/admin/login');
             }
         }

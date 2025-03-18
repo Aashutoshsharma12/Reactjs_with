@@ -57,6 +57,7 @@ const List = () => {
             setCurrentPage(currentPage);
         }
     }
+
     const searchHandler = (data) => {
         setSearch(data)
         setCurrentPage(1)

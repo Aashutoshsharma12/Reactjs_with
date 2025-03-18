@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { clear_localStorage } from '../header/helper';
+import axiosInstance from '../axiosInstance';
 
 function EditCategory() {
     const { id } = useParams(); // Get category ID from URL
@@ -16,9 +16,8 @@ function EditCategory() {
         // Fetch category details to pre-fill the form
         const fetchCategory = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/category/list/${id}`, {
+                const response = await axiosInstance.get(`api/v1/admin/category/list/${id}`, {
                     headers: {
-                        'Authorization': localStorage.getItem('token'),
                         'Content-Type': 'application/json',
                     }
                 });
@@ -41,14 +40,13 @@ function EditCategory() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(`${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/category/edit/${id}`, {
+            await axiosInstance.patch(`api/v1/admin/category/edit/${id}`, {
                 name: categoryName,
                 ar_name: arabicCategoryName,
                 isActive: status === 'Active',
                 image: imageUrl
             }, {
                 headers: {
-                    'Authorization': localStorage.getItem('token'),
                     'Content-Type': 'application/json',
                 }
             });
@@ -57,7 +55,7 @@ function EditCategory() {
             setError(err.response.data.error)
             if (err.response.data.code === 401) {
                 clear_localStorage();
-                navigate('/login')
+                navigate('/admin/login')
             }
         }
     };
@@ -111,10 +109,9 @@ function EditCategory() {
                                     try {
                                         const formData = new FormData();
                                         formData.append('image1', image);
-                                        const data = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/upload?type=Category`, formData,
+                                        const data = await axiosInstance.post(`api/v1/upload?type=Category`, formData,
                                             {
                                                 headers: {
-                                                    'Authorization': localStorage.getItem('token'),
                                                     'Content-Type': 'multipart/form-data'
                                                 }
                                             });

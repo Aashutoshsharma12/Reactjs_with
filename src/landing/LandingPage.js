@@ -8,12 +8,12 @@ function LandingPage() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            navigate('/dashboard'); // Redirect to home page if token exists
+            navigate('/admin/dashboard'); // Redirect to home page if token exists
         }
     }, [navigate]);
 
     const handleLoginClick = () => {
-        navigate('/login');
+        navigate('/admin/login');
     };
 
     return (

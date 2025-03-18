@@ -10,7 +10,7 @@ axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
         if (token) {
-            config.headers.Authorization = token;
+            config.headers.Authorization = "Bearer " + token;
         }
         return config;
     },
@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             console.log("Token expired. Redirecting to login...");
             localStorage.removeItem('token');
-            window.location.href = '/login'; // Redirect to login page
+            // window.location.href = '/admin/login'; // Redirect to login page
         }
         return Promise.reject(error);
     }

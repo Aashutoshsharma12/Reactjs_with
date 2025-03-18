@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './userList.css'; // Create a CSS file for styling
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ListUi from '../helper'
+import axiosInstance from '../axiosInstance';
 function UserList() {
+    // let a = 200, b = 30, c = 10;
+    // let temp = a
+    // a = b
+    // b = temp
+    // [a, b, c] = [c, a, b]
+    // console.log(a, "ss", b, "s", c)
     const [users, setUsers] = useState([]);
     const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,37 +18,31 @@ function UserList() {
     const [search1, setSearch1] = useState('')
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    /**
-     * Fetches the list of users from the API.
-     * 
-     * @param {string} search The search query to filter the users.
-     * @param {boolean} searchStatus Whether to set the current page to 1 or not.
-     */
+
     const fetchUsers = async (search, searchStatus) => {
         try {
-            let url = `${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/user/list?role=user&page=${currentPage}&perPage=10&nameMatched=${search1}`
+            let url = `api/v1/common/auth/list?page=${currentPage}&perPage=10&search=${search}`
             if (search && search !== '' && search !== null) {
                 setCurrentPage(1)
-                url = `${process.env.REACT_APP_BACKEND_BASE_URL}api/v1/admin/user/list?role=user&page=1&perPage=10&nameMatched=${search}`
+                url = `api/v1/common/auth/list?page=${currentPage}&perPage=10&search=${search}`
             }
-            const response = await axios.get(url, {
+            const response = await axiosInstance.get(url, {
                 headers: {
-                    'Authorization': localStorage.getItem('token'),
                     'Content-Type': 'application/json',
                 }
             });
             const data = response.data.data
-            setUsers(data.findUserDetails); // Assuming the API returns an array of users
-            setTotalCount(data.totalDocument);
-            if (data.totalDocument !== 0) {
-                const total_page = Math.ceil(data.totalDocument / 10)
+            setUsers(data.list); // Assuming the API returns an array of users
+            setTotalCount(data.count);
+            if (data.count !== 0) {
+                const total_page = Math.ceil(data.count / 10)
                 setTotalPage(total_page)
             }
             setLoading(false);
         } catch (err) {
-            setError(err.message || "Failed to fetch users");
+            setError(err?.response?.data?.error || "Failed to fetch users");
             setLoading(false);
-            if (err.response?.data?.code === 401) {
+            if (err.status === 401) {
                 navigate('/admin/login');
             }
         }
@@ -58,18 +58,11 @@ function UserList() {
     const fetch_users = (event) => {
         event.preventDefault();
         const search = event.target.value
-        console.log(search, "search----------")
-        if (search && search !== '' && search !== null) {
-            setSearch1(search);
-            setCurrentPage(1);
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            fetchUsers(search, true);
-        }
+        setSearch1(search);
+        setCurrentPage(1);
+        fetchUsers(search, true);
     }
     const view = async (userDetails) => {
-        // href = {`/users/view/${user._id}`
-        console.log(userDetails, "id-----------------------------------")
-        // setUser({ name: userDetails.name, phoneNumber: userDetails.phoneNumber, email: userDetails.email, address: userDetails.address })
         navigate(`/admin/users/view?name=${userDetails.name}&phoneNumber=${userDetails.phoneNumber}&email=${userDetails.email}&address=${userDetails.address}&status=${userDetails.status ? 'Active' : 'Inactive'}`)
     }
     if (loading) return <p>Loading...</p>;
@@ -94,6 +87,7 @@ function UserList() {
                         <th>Address</th>
                         <th>Created At</th>
                         <th>Status</th>
+                        <th>Delete Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>

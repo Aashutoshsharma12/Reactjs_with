@@ -7,7 +7,7 @@ function Sidebar() {
         < div className="sidebar" >
             <h2>Navigation</h2>
             <ul>
-                <li><NavLink to="/admin" className={({ isActive }) => (isActive || location.pathname === "/dashboard") ? "active-link" : "inactive-link"}>Dashborad</NavLink></li>
+                <li><NavLink to="/admin/dashboard" className={({ isActive }) => (isActive || location.pathname === "/admin/dashboard") ? "active-link" : "inactive-link"}>Dashborad</NavLink></li>
                 <li><NavLink to="/admin/about" className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>About</NavLink></li>
                 <li><NavLink to="/admin/categories" className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Categories</NavLink></li>
                 <li><NavLink to="/admin/users" className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Users</NavLink></li>
